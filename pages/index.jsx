@@ -1,13 +1,13 @@
 import abi from '../utils/BuyMeABeer.json';
 import { ethers } from "ethers";
 import Head from 'next/head'
-import Image from 'next/image'
+//import Image from 'next/image'
 import React, { useEffect, useState } from "react";
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
   // Contract Address & ABI
-  const contractAddress = "0x186dC04dAEe62992D125c009fA6214d1523684C6";
+  const contractAddress = "0x3801fe1504f6e59cc372A23506733791128dA8e0";
   const contractABI = abi.abi;
 
   // Component state
@@ -61,7 +61,7 @@ export default function Home() {
     }
   }
 
-  const buyCoffee = async () => {
+  const buyBeer = async () => {
     try {
       const { ethereum } = window;
 
@@ -74,18 +74,18 @@ export default function Home() {
           signer
         );
 
-        console.log("buying coffee..")
-        const coffeeTxn = await buyMeABeer.buyCoffee(
-          name ? name : "anon",
-          message ? message : "Enjoy your beer!",
+        console.log("buying beer..")
+        const beerTxn = await buyMeABeer.buyBeer(
+          name ? name : "xxxx",
+          message ? message : "Goditi questa birra!",
           { value: ethers.utils.parseEther("0.001") }
         );
 
-        await coffeeTxn.wait();
+        await beerTxn.wait();
 
-        console.log("mined ", coffeeTxn.hash);
+        console.log("mined ", beerTxn.hash);
 
-        console.log("coffee purchased!");
+        console.log("beer purchased!");
 
         // Clear the form fields.
         setName("");
@@ -196,13 +196,13 @@ export default function Home() {
               <br />
               <div>
                 <label>
-                  Send Albert a message
+                  Send Stefano a message
                 </label>
                 <br />
 
                 <textarea
                   rows={3}
-                  placeholder="Enjoy your Beer!"
+                  placeholder="Goditi questa birra!"
                   id="message"
                   onChange={onMessageChange}
                   required
@@ -212,7 +212,7 @@ export default function Home() {
               <div>
                 <button
                   type="button"
-                  onClick={buyCoffee}
+                  onClick={buyBeer}
                 >
                   Send 1 Beer for 0.001ETH
                 </button>
@@ -236,6 +236,7 @@ export default function Home() {
       }))}
 
       <footer className={styles.footer}>
+        Esempio di codice creato da Alpinelab.
         <a
           href="https://alchemy.com/?a=roadtoweb3weektwo"
           target="_blank"
